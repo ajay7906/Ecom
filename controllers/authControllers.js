@@ -7,11 +7,11 @@ const bcrypt = require('bcrypt');
 // register controller function
 const registerUser = async (req, res) => {
     try {
-        const { name, password, email, confirmPassword } = req.body;
+        const { name, password, email } = req.body;
 
       
 
-        if (!name || !password ||!email, !confirmPassword) {
+        if (!name || !password ||!email) {
             return res.status(400).json({
                 errorMessage: "complete all filled",
                 success: false
@@ -20,9 +20,9 @@ const registerUser = async (req, res) => {
 
 
 
-        if (password !== confirmPassword) {
-            return res.status(400).json({success: false, errorMessage: 'Passwords do not match' });
-          }
+        // if (password !== confirmPassword) {
+        //     return res.status(400).json({success: false, errorMessage: 'Passwords do not match' });
+        //   }
         // console.log(req);
         const isExistingUser = await User.findOne({ email: email });
         if (isExistingUser) {
